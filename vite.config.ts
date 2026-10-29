@@ -1,3 +1,4 @@
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -10,5 +11,14 @@ export default defineConfig({
         },
       },
     }),
+    svelte(),
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: "index.html",
+        compare: "lit.html",
+      },
+    },
+  },
 });
