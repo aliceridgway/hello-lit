@@ -17,7 +17,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "index.html",
-        compare: "lit.html",
+        button: "button.html",
+        dialog: "dialog.html",
       },
     },
   },
