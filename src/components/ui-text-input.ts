@@ -146,6 +146,12 @@ export class UiTextInput extends LitElement {
     this.value = input.value;
   }
 
+  private onKeydown(event: KeyboardEvent) {
+    if (event.key !== "Enter" || event.defaultPrevented || event.isComposing || this.controlDisabled) return;
+    if (this.type === "textarea") return;
+    this.internals.form?.requestSubmit();
+  }
+
   override render() {
     return html`
       <input
@@ -158,6 +164,7 @@ export class UiTextInput extends LitElement {
         aria-invalid=${this.invalid ? "true" : nothing}
         aria-description=${this.description || nothing}
         @input=${this.onInput}
+        @keydown=${this.onKeydown}
       />
     `;
   }
