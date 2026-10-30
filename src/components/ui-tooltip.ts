@@ -77,6 +77,7 @@ export class UiTooltip extends LitElement {
   private readonly tooltipId = `ui-tooltip-${++nextTooltipId}`;
   private hovering = false;
   private focused = false;
+  private dismissed = false;
 
   override connectedCallback() {
     super.connectedCallback();
@@ -84,6 +85,7 @@ export class UiTooltip extends LitElement {
     this.addEventListener("mouseleave", this.onPointerLeave);
     this.addEventListener("focusin", this.onFocusIn);
     this.addEventListener("focusout", this.onFocusOut);
+    this.addEventListener("click", this.onClick);
   }
 
   override disconnectedCallback() {
@@ -92,6 +94,7 @@ export class UiTooltip extends LitElement {
     this.removeEventListener("mouseleave", this.onPointerLeave);
     this.removeEventListener("focusin", this.onFocusIn);
     this.removeEventListener("focusout", this.onFocusOut);
+    this.removeEventListener("click", this.onClick);
   }
 
   override willUpdate(changed: PropertyValues<this>) {
@@ -101,6 +104,7 @@ export class UiTooltip extends LitElement {
   }
 
   private readonly onPointerEnter = () => {
+    this.dismissed = false;
     this.hovering = true;
     this.sync();
   };
@@ -111,7 +115,14 @@ export class UiTooltip extends LitElement {
   };
 
   private readonly onFocusIn = () => {
+    this.dismissed = false;
     this.focused = true;
+    this.sync();
+  };
+
+  private readonly onClick = (event: Event) => {
+    if (this.tooltipEl && event.composedPath().includes(this.tooltipEl)) return;
+    this.dismissed = true;
     this.sync();
   };
 
@@ -127,7 +138,7 @@ export class UiTooltip extends LitElement {
   }
 
   private sync() {
-    const open = this.hovering || this.focused;
+    const open = !this.dismissed && (this.hovering || this.focused);
     if (open === this.open) return;
     this.open = open;
   }
