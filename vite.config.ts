@@ -20,6 +20,7 @@ export default defineConfig({
         button: "button.html",
         dialog: "dialog.html",
         tooltip: "tooltip.html",
+        popover: "popover.html",
       },
     },
   },
