@@ -1,6 +1,20 @@
 :root {
   --ui-font-sans: "Segoe UI", system-ui, sans-serif;
+  --ui-font-weight-medium: 500;
   --ui-font-weight-semibold: 600;
+  --ui-color-fg: #111827;
+  --ui-color-fg-muted: #6b7280;
+  --ui-color-danger: #dc2626;
+
+  --ui-field-bg: #ffffff;
+  --ui-field-fg: #111827;
+  --ui-field-placeholder: #9ca3af;
+  --ui-field-border: #d1d5db;
+  --ui-field-border-hover: #9ca3af;
+  --ui-field-border-focus: #4f46e5;
+  --ui-field-focus-ring: rgb(79 70 229 / 0.25);
+  --ui-field-border-invalid: #dc2626;
+  --ui-field-focus-ring-invalid: rgb(220 38 38 / 0.25);
   --ui-line-height: 1.25;
   --ui-font-size-sm: 0.875rem;
   --ui-font-size-md: 1rem;
