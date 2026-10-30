@@ -56,6 +56,35 @@ body {
   padding: 1.5rem 0 0.5rem;
 }
 
+.popover-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-3);
+  width: 16rem;
+  max-width: 100%;
+}
+
+.popover-form h3 {
+  margin: 0;
+  font-size: var(--ui-font-size-md);
+  font-weight: var(--ui-font-weight-semibold);
+  line-height: var(--ui-line-height);
+}
+
+.popover-form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-1);
+  color: var(--ui-color-fg);
+  font-size: var(--ui-font-size-sm);
+  font-weight: var(--ui-font-weight-medium);
+}
+
+.popover-form__actions {
+  display: flex;
+  gap: var(--ui-space-2);
+}
+
 .form-demo {
   display: flex;
   flex-direction: column;

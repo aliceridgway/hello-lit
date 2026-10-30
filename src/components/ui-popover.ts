@@ -77,7 +77,7 @@ export class UiPopover extends LitElement {
     this.removeEventListener("pointerdown", this.onPointerDown);
     this.removeEventListener("click", this.onClick);
     this.unbindReposition();
-    if (this.panel?.matches(":popover-open")) this.panel.hidePopover();
+    this.close();
   }
 
   private isPanelEvent(event: Event) {
@@ -94,9 +94,13 @@ export class UiPopover extends LitElement {
     return event.composedPath().some((node) => node instanceof HTMLElement && node.hasAttribute("data-popover-close"));
   }
 
+  close() {
+    if (this.panel?.matches(":popover-open")) this.panel.hidePopover();
+  }
+
   private readonly onClick = (event: Event) => {
     if (this.isCloseRequest(event)) {
-      if (this.panel?.matches(":popover-open")) this.panel.hidePopover();
+      this.close();
       return;
     }
     if (this.isPanelEvent(event)) return;
@@ -109,7 +113,10 @@ export class UiPopover extends LitElement {
   private readonly onToggle = (event: Event) => {
     const open = event instanceof ToggleEvent ? event.newState === "open" : this.panel.matches(":popover-open");
     if (open) this.bindReposition();
-    else this.unbindReposition();
+    else {
+      this.unbindReposition();
+      this.dispatchEvent(new CustomEvent("close", { bubbles: true, composed: true }));
+    }
     this.setExpanded(open);
   };
 
@@ -187,7 +194,7 @@ export class UiPopover extends LitElement {
   private toggle() {
     if (!this.panel) return;
     if (this.panel.matches(":popover-open")) {
-      this.panel.hidePopover();
+      this.close();
       return;
     }
     this.place();

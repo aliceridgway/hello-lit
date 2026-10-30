@@ -1,14 +1,32 @@
 <script lang="ts">
   import "../components/ui-button";
   import "../components/ui-popover";
+  import "../components/ui-text-input";
+  import type { UiPopover } from "../components/ui-popover";
+
+  let notePopover = $state<UiPopover>();
+  let noteForm = $state<HTMLFormElement>();
+
+  function onNoteSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    notePopover?.close();
+  }
 </script>
 
 <div class="popover-demo">
-  <ui-popover>
+  <ui-popover bind:this={notePopover} onclose={() => noteForm?.reset()}>
     <ui-button>Open popover</ui-button>
-    <h3 slot="content">Popover heading</h3>
-    <p slot="content">Arbitrary popover text.</p>
-    <ui-button slot="content" variant="secondary" data-popover-close>Close</ui-button>
+    <form bind:this={noteForm} slot="content" class="popover-form" onsubmit={onNoteSubmit}>
+      <h3>Add a note</h3>
+      <label for="svelte-note">
+        Note
+        <ui-text-input id="svelte-note" name="note"></ui-text-input>
+      </label>
+      <div class="popover-form__actions">
+        <ui-button type="submit">Save</ui-button>
+        <ui-button type="button" variant="secondary" data-popover-close>Cancel</ui-button>
+      </div>
+    </form>
   </ui-popover>
   <ui-popover>
     <ui-button>Open large popover</ui-button>

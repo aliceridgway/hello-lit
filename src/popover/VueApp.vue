@@ -1,15 +1,37 @@
 <script setup lang="ts">
+import { useTemplateRef } from "vue";
 import "../components/ui-button";
 import "../components/ui-popover";
+import "../components/ui-text-input";
+import type { UiPopover } from "../components/ui-popover";
+
+const notePopover = useTemplateRef<UiPopover>("notePopover");
+const noteForm = useTemplateRef<HTMLFormElement>("noteForm");
+
+function onNoteSubmit() {
+  notePopover.value?.close();
+}
+
+function onPopoverClose() {
+  noteForm.value?.reset();
+}
 </script>
 
 <template>
   <div class="popover-demo">
-    <ui-popover>
+    <ui-popover ref="notePopover" @close="onPopoverClose">
       <ui-button>Open popover</ui-button>
-      <h3 slot="content">Popover heading</h3>
-      <p slot="content">Arbitrary popover text.</p>
-      <ui-button slot="content" variant="secondary" data-popover-close>Close</ui-button>
+      <form ref="noteForm" slot="content" class="popover-form" @submit.prevent="onNoteSubmit">
+        <h3>Add a note</h3>
+        <label for="vue-note">
+          Note
+          <ui-text-input id="vue-note" name="note"></ui-text-input>
+        </label>
+        <div class="popover-form__actions">
+          <ui-button type="submit">Save</ui-button>
+          <ui-button type="button" variant="secondary" data-popover-close>Cancel</ui-button>
+        </div>
+      </form>
     </ui-popover>
     <ui-popover>
       <ui-button>Open large popover</ui-button>
