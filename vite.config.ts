@@ -19,6 +19,7 @@ export default defineConfig({
         main: "index.html",
         button: "button.html",
         dialog: "dialog.html",
+        tooltip: "tooltip.html",
       },
     },
   },
