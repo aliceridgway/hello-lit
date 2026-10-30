@@ -3,10 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue and Lit buttons</title>
+    <title>Component demos</title>
+    <style>
+      :root {
+        color: #111827;
+        background: #f3f4f6;
+        font-family: "Segoe UI", system-ui, sans-serif;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .page {
+        max-width: 40rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+
+      h1 {
+        margin: 0 0 0.35rem;
+        font-size: 1.75rem;
+        line-height: 1.2;
+      }
+
+      .lede {
+        margin: 0 0 1.5rem;
+        color: #4b5563;
+      }
+
+      .lede a {
+        color: #4338ca;
+      }
+
+      .lede a:hover {
+        text-decoration: none;
+      }
+
+      .lede a:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+
+      nav {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      nav a {
+        display: block;
+        padding: 1rem 1.25rem;
+        color: #111827;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        border-color: #c7d2fe;
+        background: #eef2ff;
+      }
+
+      nav a:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+
+      .label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .hint {
+        display: block;
+        margin-top: 0.25rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <main class="page">
+      <h1>Component demos</h1>
+      <p class="lede">In each demo, a Vue and Svelte app renders the same Web Component written with <a href="https://lit.dev" rel="noreferrer">Lit</a></p>
+      <nav aria-label="Demos">
+        <a href="/button.html">
+          <span class="label">Button</span>
+          <span class="hint">button.html</span>
+        </a>
+        <a href="/dialog.html">
+          <span class="label">Dialog</span>
+          <span class="hint">dialog.html</span>
+        </a>
+        <a href="/form.html">
+          <span class="label">Form</span>
+          <span class="hint">form.html</span>
+        </a>
+        <a href="/popover.html">
+          <span class="label">Popover</span>
+          <span class="hint">popover.html</span>
+        </a>
+        <a href="/tooltip.html">
+          <span class="label">Tooltip</span>
+          <span class="hint">tooltip.html</span>
+        </a>
+      </nav>
+    </main>
   </body>
 </html>
