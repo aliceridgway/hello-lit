@@ -2,11 +2,13 @@
 
 Lit is a library for building web components. It was originally created by Google and is now managedby the OpenJS Foundation.
 
+The library is 6kb gzipped, about a quarter of the size of Vue.
+
 ### What are Web Components?
 
-Web Components are a set of web platform APIs that allow you to create new custom, reusable, encapsulated HTML tags to use in your web pages and web apps.
+Web Components are like Vue components, but they run natively in the browser and can be integrated into any framework.
 
-Its selling point is interoperability. You can write components once and use them in Vue, Svelte, and other frameworks.
+It would allow us to create one library that can be consumed by both Vue and Svelte projects.
 
 ### What is Lit for?
 
@@ -17,3 +19,12 @@ Lit provides the boilerplate for writing web components. It assists with reactiv
 AI can allow us to be more selective about the libraries we use, but replacing dependencies with AI-generated code does not reduce overall risk.
 
 To implement web components without Lit, AI would need to generate a large volume of code and likely fall back to a homegrown mini-framework. The burden of bugs, maintenance, and security reviews would shift to the development team.
+
+## Compatibility
+
+| Framework | Compatibility |
+|-----------|---------------|
+| Svelte    | Optimal          |
+| Vue 3     | Optimal          |
+| Vue 2     | Risky. AI describes Vue 2 as 'the awkward consumer' and the framework that would need the most glue to make it work. Given Vue 2 is EOL, an upgrade to Vue 3 or Svelte should be considered.    |
+| jQuery    | Yes, in theory; but may need additional glue to make it work. |
