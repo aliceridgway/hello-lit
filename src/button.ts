@@ -1,7 +1,7 @@
 import { mount } from "svelte";
 import { createApp } from "vue";
-import SvelteApp from "./compare/SvelteApp.svelte";
-import VueApp from "./compare/VueApp.vue";
+import SvelteApp from "./button/SvelteApp.svelte";
+import VueApp from "./button/VueApp.vue";
 import "./compare/compare.css";
 import "./styles/tokens.css";
 
