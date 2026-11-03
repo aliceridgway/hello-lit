@@ -94,6 +94,16 @@ export class UiPopover extends LitElement {
     return event.composedPath().some((node) => node instanceof HTMLElement && node.hasAttribute("data-popover-close"));
   }
 
+  get isOpen() {
+    return this.panel?.matches(":popover-open") ?? false;
+  }
+
+  show() {
+    if (!this.panel || this.panel.matches(":popover-open")) return;
+    this.place();
+    this.panel.showPopover();
+  }
+
   close() {
     if (this.panel?.matches(":popover-open")) this.panel.hidePopover();
   }
@@ -118,6 +128,13 @@ export class UiPopover extends LitElement {
       this.dispatchEvent(new CustomEvent("close", { bubbles: true, composed: true }));
     }
     this.setExpanded(open);
+    this.dispatchEvent(
+      new CustomEvent("open-change", {
+        detail: { open },
+        bubbles: true,
+        composed: false,
+      }),
+    );
   };
 
   private readonly onReposition = () => {
@@ -192,13 +209,8 @@ export class UiPopover extends LitElement {
   }
 
   private toggle() {
-    if (!this.panel) return;
-    if (this.panel.matches(":popover-open")) {
-      this.close();
-      return;
-    }
-    this.place();
-    this.panel.showPopover();
+    if (this.isOpen) this.close();
+    else this.show();
   }
 
   private setExpanded(open: boolean) {
