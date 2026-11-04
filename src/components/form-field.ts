@@ -96,7 +96,7 @@ export function renderFormField(field: FormFieldChrome) {
       })}
     >
       <label class="ui-field__label" for=${field.id} ?hidden=${!showLabel}>
-        <slot @slotchange=${field.onLabelSlotChange}>${field.label ?? ""}</slot>
+        <slot name="label" @slotchange=${field.onLabelSlotChange}>${field.label ?? ""}</slot>
         ${field.required
           ? html`<span class="ui-field__required" aria-hidden="true">*</span>`
           : nothing}
