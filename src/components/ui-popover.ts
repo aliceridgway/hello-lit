@@ -170,7 +170,7 @@ export class UiPopover extends LitElement {
     if (!trigger) return;
     const rect = trigger.getBoundingClientRect();
     const margin = 8;
-    const gap = 8;
+    const gap = 4;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 

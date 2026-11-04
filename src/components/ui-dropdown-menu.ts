@@ -22,9 +22,11 @@ export class UiDropdownMenu extends LitElement {
       display: flex;
       flex-direction: column;
       gap: var(--ui-space-1);
-      min-width: 8rem;
-      margin: 0;
-      padding: 0;
+      box-sizing: border-box;
+      width: calc(100% + 2 * var(--ui-space-4));
+      min-width: calc(8rem + 2 * var(--ui-space-4));
+      margin: calc(-1 * var(--ui-space-3)) calc(-1 * var(--ui-space-4));
+      padding: var(--ui-space-2) 0;
     }
   `;
 

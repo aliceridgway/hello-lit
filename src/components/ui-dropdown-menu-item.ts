@@ -23,7 +23,7 @@ export class UiDropdownMenuItem extends LitElement {
       margin: 0;
       padding: var(--ui-space-2) var(--ui-space-3);
       border: none;
-      border-radius: var(--ui-radius-md);
+      border-radius: 0;
       background: transparent;
       color: #111827;
       font-family: var(--ui-font-sans);
