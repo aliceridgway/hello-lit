@@ -36,6 +36,9 @@
     <ui-form-field label="Username" error="That username is taken.">
       <ui-text-input value="admin"></ui-text-input>
     </ui-form-field>
+    <ui-form-field label="Permalink" help="Generated from your display name.">
+      <ui-text-input value="foo-bar" readonly={true}></ui-text-input>
+    </ui-form-field>
     <ui-form-field label="Account id">
       <ui-text-input value="usr_2048" disabled={true}></ui-text-input>
     </ui-form-field>

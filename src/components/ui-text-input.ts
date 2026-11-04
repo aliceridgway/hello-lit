@@ -37,7 +37,7 @@ export class UiTextInput extends LitElement {
       color: var(--ui-field-placeholder);
     }
 
-    .ui-field__control:hover:not(:disabled):not(:focus) {
+    .ui-field__control:hover:not(:disabled):not(:read-only):not(:focus) {
       border-color: var(--ui-field-border-hover);
     }
 
@@ -50,6 +50,12 @@ export class UiTextInput extends LitElement {
     .ui-field__control:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    .ui-field__control:read-only {
+      background: #f9fafb;
+      color: var(--ui-color-fg-muted);
+      cursor: default;
     }
 
     :host([invalid]) .ui-field__control {
@@ -82,6 +88,9 @@ export class UiTextInput extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
 
   @property({ type: Boolean, reflect: true })
   required = false;
@@ -147,7 +156,15 @@ export class UiTextInput extends LitElement {
   }
 
   private onKeydown(event: KeyboardEvent) {
-    if (event.key !== "Enter" || event.defaultPrevented || event.isComposing || this.controlDisabled) return;
+    if (
+      event.key !== "Enter" ||
+      event.defaultPrevented ||
+      event.isComposing ||
+      this.controlDisabled ||
+      this.readonly
+    ) {
+      return;
+    }
     if (this.type === "textarea") return;
     this.internals.form?.requestSubmit();
   }
@@ -160,6 +177,7 @@ export class UiTextInput extends LitElement {
         .value=${this.value}
         placeholder=${this.placeholder || nothing}
         ?disabled=${this.controlDisabled}
+        ?readonly=${this.readonly}
         ?required=${this.required}
         aria-invalid=${this.invalid ? "true" : nothing}
         aria-description=${this.description || nothing}
