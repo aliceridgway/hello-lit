@@ -16,7 +16,7 @@ export class UiDialog extends LitElement {
       margin: auto;
       padding: var(--ui-space-4);
       border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
+      border-radius: var(--ui-radius-lg);
       background: #ffffff;
       color: #111827;
       font-family: var(--ui-font-sans);
