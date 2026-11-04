@@ -142,8 +142,23 @@ body {
 .form-demo {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.75rem;
   padding: 1.5rem 0 1rem;
+}
+
+.form-demo__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-demo__section h3 {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .form-demo__live {
