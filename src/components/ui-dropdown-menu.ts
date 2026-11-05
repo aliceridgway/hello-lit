@@ -9,6 +9,20 @@ const OPEN_DELAY_MS = 150;
 const CLOSE_DELAY_MS = 200;
 const TYPEAHEAD_RESET_MS = 500;
 
+/**
+ * Menu built on `ui-popover`. Opens on hover, when the trigger is focused, or when `open` is set.
+ * Closes when the pointer leaves, when focus leaves, or when an item is selected.
+ *
+ * Slots: default (trigger), `items` (`ui-dropdown-menu-item` elements).
+ * Events: `open-change` with `{ open }`, and `select` bubbling from an item with `{ value }`.
+ * No public methods. Set `open` to control the menu.
+ *
+ * @example
+ * <ui-dropdown-menu>
+ *   <ui-button>Actions</ui-button>
+ *   <ui-dropdown-menu-item slot="items">Edit</ui-dropdown-menu-item>
+ * </ui-dropdown-menu>
+ */
 @customElement("ui-dropdown-menu")
 export class UiDropdownMenu extends LitElement {
   static override styles = css`

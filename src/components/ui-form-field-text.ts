@@ -12,6 +12,20 @@ import { UiTextInput } from "./ui-text-input";
 
 let nextFieldId = 0;
 
+/**
+ * `ui-form-field` and `ui-text-input` on one tag.
+ * The demos use the split pair. This is the combined alternative.
+ * When `error` is set, help is hidden.
+ *
+ * Slots: `label`, `help`, `error`. The text control is internal.
+ * An `id` on the host is removed and copied onto the inner control,
+ * which also receives `described-by`, `description`, `invalid`, and `required`.
+ * `input` bubbles from the inner control after `value` updates.
+ * No public methods.
+ *
+ * @example
+ * <ui-form-field-text label="Email" name="email" required></ui-form-field-text>
+ */
 @customElement("ui-form-field-text")
 export class UiFormFieldText extends LitElement implements FieldProps {
   static override styles = formFieldStyles;

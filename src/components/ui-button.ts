@@ -7,6 +7,21 @@ type ButtonSize = "sm" | "md" | "lg";
 type ButtonType = "button" | "submit" | "reset";
 type IconPosition = "start" | "end";
 
+/**
+ * Form-associated button.
+ *
+ * Slots: default (label), `icon`.
+ * `type="submit"` calls `requestSubmit()` on the parent form.
+ * `type="reset"` calls `reset()` on the parent form.
+ * `disabled` and `loading` stop the click from leaving the element.
+ * No public methods.
+ *
+ * @example
+ * <ui-button variant="primary" icon-position="start">
+ *   <span slot="icon" aria-hidden="true">+</span>
+ *   Add
+ * </ui-button>
+ */
 @customElement("ui-button")
 export class UiButton extends LitElement {
   static formAssociated = true;
@@ -150,9 +165,11 @@ export class UiButton extends LitElement {
   @property({ type: Boolean })
   disabled = false;
 
+  /** `"submit"` requests submit, and `"reset"` resets the parent form. */
   @property({ type: String })
   type: ButtonType = "button";
 
+  /** Which side the `icon` slot and the loading spinner sit on. */
   @property({ type: String, attribute: "icon-position" })
   iconPosition: IconPosition = "start";
 

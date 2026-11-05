@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-dropdown-menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu built on `ui-popover`. Opens after a short hover on the trigger, when the trigger receives focus, or when `open` is set. Closes after the pointer leaves, when focus leaves the menu, or when an item is selected. Arrow keys, Home, End, typeahead, Enter, and Space move through and activate the items. No public methods. Set `open` to control the menu.",
+          "name": "UiDropdownMenu",
+          "customElement": true,
+          "tagName": "ui-dropdown-menu",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true,
+              "description": "Set it to control the menu. Keep it in sync from `open-change` when the menu is controlled."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Set it to control the menu."
+            }
+          ],
+          "events": [
+            {
+              "name": "open-change",
+              "type": { "text": "CustomEvent<{ open: boolean }>" },
+              "description": "Bubbles and is composed. Fires when the menu opens or closes. `detail.open` is the next state."
+            },
+            {
+              "name": "select",
+              "type": { "text": "CustomEvent<{ value: string }>" },
+              "description": "Bubbles from `ui-dropdown-menu-item`. `detail.value` is the item's trimmed text. Selecting an item also closes the menu."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Trigger. The first element without a `slot` attribute is the trigger."
+            },
+            {
+              "name": "items",
+              "description": "`ui-dropdown-menu-item` elements."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-dropdown-menu.ts",
+            "line": 27
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiDropdownMenu",
+          "declaration": {
+            "name": "UiDropdownMenu",
+            "module": "src/components/ui-dropdown-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-dropdown-menu",
+          "declaration": {
+            "name": "UiDropdownMenu",
+            "module": "src/components/ui-dropdown-menu.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

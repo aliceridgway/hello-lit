@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-dropdown-menu-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One row in a `ui-dropdown-menu`. Place it in the menu's `items` slot. Choosing the item, with a click or with `activate()`, emits `select` and the menu closes. `value` on that event is the item's trimmed text, including text from child elements such as an icon.",
+          "name": "UiDropdownMenuItem",
+          "customElement": true,
+          "tagName": "ui-dropdown-menu-item",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true,
+              "description": "A disabled item does not emit `select`."
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "description": "Emits `select` unless the item is `disabled`.",
+              "parameters": []
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "A disabled item does not emit `select`."
+            }
+          ],
+          "events": [
+            {
+              "name": "select",
+              "type": { "text": "CustomEvent<{ value: string }>" },
+              "description": "Bubbles and is composed. `detail.value` is the trimmed text content."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Item label. An icon can sit in this slot beside the text."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-dropdown-menu-item.ts",
+            "line": 20
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiDropdownMenuItem",
+          "declaration": {
+            "name": "UiDropdownMenuItem",
+            "module": "src/components/ui-dropdown-menu-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-dropdown-menu-item",
+          "declaration": {
+            "name": "UiDropdownMenuItem",
+            "module": "src/components/ui-dropdown-menu-item.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

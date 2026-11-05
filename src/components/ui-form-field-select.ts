@@ -12,6 +12,22 @@ import { UiSelect } from "./ui-select";
 
 let nextFieldId = 0;
 
+/**
+ * `ui-form-field` and `ui-select` on one tag.
+ * The demos use the split pair. This is the combined alternative.
+ * When `error` is set, help is hidden.
+ *
+ * Slots: `label`, `help`, `error`, and `options` (forwarded to the inner select).
+ * An `id` on the host is removed and copied onto the inner control,
+ * which also receives `described-by`, `description`, `invalid`, and `required`.
+ * `input` and `change` bubble from the inner control after `value` updates.
+ * No public methods.
+ *
+ * @example
+ * <ui-form-field-select label="Fruit" name="fruit">
+ *   <option slot="options" value="apple">Apple</option>
+ * </ui-form-field-select>
+ */
 @customElement("ui-form-field-select")
 export class UiFormFieldSelect extends LitElement implements FieldProps {
   static override styles = formFieldStyles;

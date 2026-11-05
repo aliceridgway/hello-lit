@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-form-field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Label, help, and error chrome around a slotted control. When `error` is set, help is hidden and the error is shown instead. `required` renders an asterisk beside the label. An `id` on the host is removed and copied onto the first element in the default slot. The field also sets `described-by`, `description`, `invalid`, and `required` on that control. Slotted `label`, `help`, or `error` content replaces the matching property text. No events of its own. No public methods.",
+          "name": "UiFormField",
+          "customElement": true,
+          "tagName": "ui-form-field",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "label",
+              "reflects": false,
+              "description": "Fallback content for the `label` slot."
+            },
+            {
+              "kind": "field",
+              "name": "help",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "help",
+              "reflects": false,
+              "description": "Fallback content for the `help` slot. Hidden when `error` is set."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "error",
+              "reflects": false,
+              "description": "Fallback content for the `error` slot. Hides help."
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true,
+              "description": "Renders an asterisk and is copied onto the slotted control."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "help",
+              "fieldName": "help",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": { "text": "boolean" },
+              "default": "false"
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The control. The field copies `id`, `described-by`, `description`, `invalid`, and `required` onto the first assigned element."
+            },
+            {
+              "name": "label",
+              "description": "Label content. Replaces the `label` property when present."
+            },
+            {
+              "name": "help",
+              "description": "Help content. Replaces the `help` property when present. Hidden when `error` is set."
+            },
+            {
+              "name": "error",
+              "description": "Error content. Replaces the `error` property when present."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--ui-color-fg",
+              "default": "#111827",
+              "description": "Label color."
+            },
+            {
+              "name": "--ui-color-fg-muted",
+              "default": "#6b7280",
+              "description": "Help text color."
+            },
+            {
+              "name": "--ui-color-danger",
+              "default": "#dc2626",
+              "description": "Error text and required marker."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-form-field.ts",
+            "line": 26
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiFormField",
+          "declaration": {
+            "name": "UiFormField",
+            "module": "src/components/ui-form-field.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-form-field",
+          "declaration": {
+            "name": "UiFormField",
+            "module": "src/components/ui-form-field.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

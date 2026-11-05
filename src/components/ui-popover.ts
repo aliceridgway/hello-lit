@@ -1,6 +1,21 @@
 import { LitElement, css, html } from "lit";
 import { customElement, query } from "lit/decorators.js";
 
+/**
+ * Popover anchored to a trigger. Clicking the trigger toggles the panel.
+ * A descendant with `data-popover-close` closes it.
+ *
+ * Slots: default (trigger), `content` (panel).
+ * Events: `open-change` with `{ open }` (bubbles, does not cross a shadow root),
+ * and `close` when the panel closes (bubbles and composed).
+ * Public members: `isOpen`, `show()`, `close()`.
+ *
+ * @example
+ * <ui-popover>
+ *   <button>Open popover</button>
+ *   <p slot="content">Panel body</p>
+ * </ui-popover>
+ */
 @customElement("ui-popover")
 export class UiPopover extends LitElement {
   static override styles = css`

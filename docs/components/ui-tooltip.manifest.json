@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tooltip wrapped around a trigger. Opens while the pointer is over the element or focus is inside it, and dismisses on click until the pointer or focus enters again. Sets `aria-describedby` on the trigger, and on an inner `button` when the trigger is itself a custom element. No events. No public methods.",
+          "name": "UiTooltip",
+          "customElement": true,
+          "tagName": "ui-tooltip",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "text",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "text",
+              "reflects": false,
+              "description": "Tooltip copy."
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": { "text": "\"top\" | \"bottom\" | \"left\" | \"right\"" },
+              "default": "\"top\"",
+              "attribute": "position",
+              "reflects": true,
+              "description": "Any other value falls back to `\"top\"`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "text",
+              "fieldName": "text",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": { "text": "\"top\" | \"bottom\" | \"left\" | \"right\"" },
+              "default": "\"top\"",
+              "description": "Any other value falls back to `\"top\"`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Trigger."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-tooltip.ts",
+            "line": 22
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiTooltip",
+          "declaration": {
+            "name": "UiTooltip",
+            "module": "src/components/ui-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-tooltip",
+          "declaration": {
+            "name": "UiTooltip",
+            "module": "src/components/ui-tooltip.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

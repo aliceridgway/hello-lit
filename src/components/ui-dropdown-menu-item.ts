@@ -5,6 +5,17 @@ export type DropdownMenuSelectDetail = {
   value: string;
 };
 
+/**
+ * One row in a `ui-dropdown-menu`. Place it in the menu's `items` slot.
+ *
+ * Slots: default (label).
+ * `select` bubbles and is composed, with `{ value }` set to the trimmed text content.
+ * A `disabled` item does not emit `select`.
+ * Public method: `activate()`.
+ *
+ * @example
+ * <ui-dropdown-menu-item slot="items">Edit</ui-dropdown-menu-item>
+ */
 @customElement("ui-dropdown-menu-item")
 export class UiDropdownMenuItem extends LitElement {
   static override styles = css`

@@ -1,5 +1,7 @@
 ## Lit
 
+Component manifests: [docs/components](docs/components).
+
 Lit is a library for building web components. It was originally created by Google and is now managedby the OpenJS Foundation.
 
 The library is 6kb gzipped, about a quarter of the size of Vue.

@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-form-field-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`ui-form-field` and `ui-text-input` on one tag. The demos use the split pair. This is the combined alternative. When `error` is set, help is hidden. An `id` on the host is removed and copied onto the inner control, which also receives `described-by`, `description`, `invalid`, and `required`. `input` bubbles from the inner control after `value` updates. No public methods.",
+          "name": "UiFormFieldText",
+          "customElement": true,
+          "tagName": "ui-form-field-text",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "label",
+              "reflects": false,
+              "description": "Fallback content for the `label` slot."
+            },
+            {
+              "kind": "field",
+              "name": "help",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "help",
+              "reflects": false,
+              "description": "Fallback content for the `help` slot. Hidden when `error` is set."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "error",
+              "reflects": false,
+              "description": "Fallback content for the `error` slot. Hides help."
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "value",
+              "reflects": false,
+              "description": "Current text."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "placeholder",
+              "reflects": false
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "name",
+              "reflects": false,
+              "description": "Passed to the inner `ui-text-input`."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": { "text": "string" },
+              "default": "\"text\"",
+              "attribute": "type",
+              "reflects": false,
+              "description": "Passed to the inner `ui-text-input`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "help",
+              "fieldName": "help",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": { "text": "boolean" },
+              "default": "false"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": { "text": "string" },
+              "default": "\"text\""
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": { "text": "InputEvent" },
+              "description": "Bubbles from the inner `ui-text-input`. `value` on this element is already updated."
+            }
+          ],
+          "slots": [
+            {
+              "name": "label",
+              "description": "Label content. Replaces the `label` property when present."
+            },
+            {
+              "name": "help",
+              "description": "Help content. Hidden when `error` is set."
+            },
+            {
+              "name": "error",
+              "description": "Error content. Replaces the `error` property when present."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--ui-color-fg",
+              "default": "#111827",
+              "description": "Label color."
+            },
+            {
+              "name": "--ui-color-fg-muted",
+              "default": "#6b7280",
+              "description": "Help text color."
+            },
+            {
+              "name": "--ui-color-danger",
+              "default": "#dc2626",
+              "description": "Error text and required marker."
+            },
+            {
+              "name": "--ui-field-bg",
+              "default": "#ffffff",
+              "description": "Control background."
+            },
+            {
+              "name": "--ui-field-fg",
+              "default": "#111827",
+              "description": "Control text color."
+            },
+            {
+              "name": "--ui-field-placeholder",
+              "default": "#9ca3af",
+              "description": "Placeholder color."
+            },
+            {
+              "name": "--ui-field-border",
+              "default": "#d1d5db",
+              "description": "Control border."
+            },
+            {
+              "name": "--ui-field-border-hover",
+              "default": "#9ca3af",
+              "description": "Border on hover."
+            },
+            {
+              "name": "--ui-field-border-focus",
+              "default": "#4f46e5",
+              "description": "Border while focused."
+            },
+            {
+              "name": "--ui-field-focus-ring",
+              "default": "rgb(79 70 229 / 0.25)",
+              "description": "Focus ring."
+            },
+            {
+              "name": "--ui-field-border-invalid",
+              "default": "#dc2626",
+              "description": "Border when the field has an error."
+            },
+            {
+              "name": "--ui-field-focus-ring-invalid",
+              "default": "rgb(220 38 38 / 0.25)",
+              "description": "Focus ring when the field has an error."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-form-field-text.ts",
+            "line": 30
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiFormFieldText",
+          "declaration": {
+            "name": "UiFormFieldText",
+            "module": "src/components/ui-form-field-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-form-field-text",
+          "declaration": {
+            "name": "UiFormFieldText",
+            "module": "src/components/ui-form-field-text.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

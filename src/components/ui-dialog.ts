@@ -2,6 +2,18 @@ import { LitElement, css, html, type PropertyValues } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 
+/**
+ * Modal dialog. Set `open` to show it.
+ *
+ * Slots: default (body). The element supplies the close button.
+ * `close` bubbles and is composed when the user dismisses the dialog
+ * with the close button, a backdrop click, or Escape.
+ * Setting `open` to false from outside closes the dialog without a further `close` event.
+ * No public methods.
+ *
+ * @example
+ * <ui-dialog open width="24rem">Dialog content</ui-dialog>
+ */
 @customElement("ui-dialog")
 export class UiDialog extends LitElement {
   static override styles = css`

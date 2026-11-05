@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Form-associated button. `type=\"submit\"` calls `requestSubmit()` on the parent form. `type=\"reset\"` calls `reset()` on the parent form. `disabled` and `loading` stop the click from leaving the element. No public methods.",
+          "name": "UiButton",
+          "customElement": true,
+          "tagName": "ui-button",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": { "text": "boolean" },
+              "default": "true",
+              "static": true,
+              "readonly": true,
+              "description": "The element participates in the parent form through `ElementInternals`."
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": { "text": "\"primary\" | \"secondary\" | \"ghost\"" },
+              "default": "\"primary\"",
+              "attribute": "variant",
+              "reflects": false
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": { "text": "\"sm\" | \"md\" | \"lg\"" },
+              "default": "\"md\"",
+              "attribute": "size",
+              "reflects": false
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": false,
+              "description": "Disables the inner button and stops the click from leaving the element."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": { "text": "\"button\" | \"submit\" | \"reset\"" },
+              "default": "\"button\"",
+              "attribute": "type",
+              "reflects": false,
+              "description": "`\"submit\"` requests submit, and `\"reset\"` resets the parent form."
+            },
+            {
+              "kind": "field",
+              "name": "iconPosition",
+              "type": { "text": "\"start\" | \"end\"" },
+              "default": "\"start\"",
+              "attribute": "icon-position",
+              "reflects": false,
+              "description": "Which side the `icon` slot and the loading spinner sit on."
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": false,
+              "description": "Hides the icon, shows a spinner on the `icon-position` side, and sets `aria-busy` on the inner button. Stops the click from leaving the element."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": { "text": "\"primary\" | \"secondary\" | \"ghost\"" },
+              "default": "\"primary\""
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": { "text": "\"sm\" | \"md\" | \"lg\"" },
+              "default": "\"md\""
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Disables the inner button and stops the click from leaving the element."
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": { "text": "\"button\" | \"submit\" | \"reset\"" },
+              "default": "\"button\"",
+              "description": "`\"submit\"` requests submit, and `\"reset\"` resets the parent form. The inner control stays `type=\"button\"`."
+            },
+            {
+              "name": "icon-position",
+              "fieldName": "iconPosition",
+              "type": { "text": "\"start\" | \"end\"" },
+              "default": "\"start\"",
+              "description": "Which side the `icon` slot and the loading spinner sit on."
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Hides the icon, shows a spinner on the `icon-position` side, and sets `aria-busy` on the inner button."
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "type": { "text": "MouseEvent" },
+              "description": "Bubbles from the inner button when the element is neither `disabled` nor `loading`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Button label."
+            },
+            {
+              "name": "icon",
+              "description": "Icon shown beside the label. Hidden while `loading` is true."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--ui-button-primary-bg",
+              "default": "#4f46e5",
+              "description": "Background for `variant=\"primary\"`."
+            },
+            {
+              "name": "--ui-button-primary-fg",
+              "default": "#ffffff",
+              "description": "Text color for `variant=\"primary\"`."
+            },
+            {
+              "name": "--ui-button-primary-icon",
+              "default": "#ffffff",
+              "description": "Icon color for `variant=\"primary\"`."
+            },
+            {
+              "name": "--ui-button-secondary-bg",
+              "default": "#ffffff",
+              "description": "Background for `variant=\"secondary\"`."
+            },
+            {
+              "name": "--ui-button-secondary-fg",
+              "default": "#111827",
+              "description": "Text color for `variant=\"secondary\"`."
+            },
+            {
+              "name": "--ui-button-secondary-icon",
+              "default": "#4338ca",
+              "description": "Icon color for `variant=\"secondary\"`."
+            },
+            {
+              "name": "--ui-button-secondary-border",
+              "default": "#d1d5db",
+              "description": "Border color for `variant=\"secondary\"`."
+            },
+            {
+              "name": "--ui-button-ghost-bg",
+              "default": "transparent",
+              "description": "Background for `variant=\"ghost\"`."
+            },
+            {
+              "name": "--ui-button-ghost-fg",
+              "default": "#4338ca",
+              "description": "Text color for `variant=\"ghost\"`."
+            },
+            {
+              "name": "--ui-button-ghost-icon",
+              "default": "#4338ca",
+              "description": "Icon color for `variant=\"ghost\"`."
+            },
+            {
+              "name": "--ui-button-ghost-hover-bg",
+              "default": "#eef2ff",
+              "description": "Hover background for `variant=\"ghost\"`."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-button.ts",
+            "line": 26
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiButton",
+          "declaration": {
+            "name": "UiButton",
+            "module": "src/components/ui-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-button",
+          "declaration": {
+            "name": "UiButton",
+            "module": "src/components/ui-button.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

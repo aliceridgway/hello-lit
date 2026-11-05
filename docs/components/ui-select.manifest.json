@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Select control. Form-associated: `name` submits `value`, a form reset restores the value from connection, and a disabled fieldset disables the control. Copies `<option>` and `<optgroup>` elements from the `options` slot into the inner select. Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed. No public methods. `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.",
+          "name": "UiSelect",
+          "customElement": true,
+          "tagName": "ui-select",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": { "text": "boolean" },
+              "default": "true",
+              "static": true,
+              "readonly": true,
+              "description": "The element participates in the parent form through `ElementInternals`."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "value",
+              "reflects": false,
+              "description": "Selected option value."
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "invalid",
+              "reflects": true,
+              "description": "Set by `ui-form-field` when the field has an error."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "name",
+              "reflects": true,
+              "description": "Form field name."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "description",
+              "reflects": false,
+              "description": "Help or error copy. An id reference cannot cross into this shadow root."
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "described-by",
+              "reflects": false,
+              "description": "Id of the help or error element. Copied to `aria-describedby` on the host."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": { "text": "boolean" },
+              "default": "false"
+            },
+            {
+              "name": "required",
+              "fieldName": "required",
+              "type": { "text": "boolean" },
+              "default": "false"
+            },
+            {
+              "name": "invalid",
+              "fieldName": "invalid",
+              "type": { "text": "boolean" },
+              "default": "false"
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "described-by",
+              "fieldName": "describedBy",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "description": "Id of the help or error element. Copied to `aria-describedby` on the host."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": { "text": "Event" },
+              "description": "Bubbles and is composed. Fired on this host after `value` updates."
+            },
+            {
+              "name": "change",
+              "type": { "text": "Event" },
+              "description": "Bubbles and is composed. Fired on this host after `value` updates."
+            }
+          ],
+          "slots": [
+            {
+              "name": "options",
+              "description": "`<option>` and `<optgroup>` elements. Each option needs `slot=\"options\"`."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--ui-field-bg",
+              "default": "#ffffff",
+              "description": "Control background."
+            },
+            {
+              "name": "--ui-field-fg",
+              "default": "#111827",
+              "description": "Control text color."
+            },
+            {
+              "name": "--ui-field-border",
+              "default": "#d1d5db",
+              "description": "Control border."
+            },
+            {
+              "name": "--ui-field-border-hover",
+              "default": "#9ca3af",
+              "description": "Border on hover."
+            },
+            {
+              "name": "--ui-field-border-focus",
+              "default": "#4f46e5",
+              "description": "Border while focused."
+            },
+            {
+              "name": "--ui-field-focus-ring",
+              "default": "rgb(79 70 229 / 0.25)",
+              "description": "Focus ring."
+            },
+            {
+              "name": "--ui-field-border-invalid",
+              "default": "#dc2626",
+              "description": "Border when `invalid` is set."
+            },
+            {
+              "name": "--ui-field-focus-ring-invalid",
+              "default": "rgb(220 38 38 / 0.25)",
+              "description": "Focus ring when `invalid` is set."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-select.ts",
+            "line": 24
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiSelect",
+          "declaration": {
+            "name": "UiSelect",
+            "module": "src/components/ui-select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-select",
+          "declaration": {
+            "name": "UiSelect",
+            "module": "src/components/ui-select.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

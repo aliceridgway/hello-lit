@@ -10,6 +10,12 @@ let nextFieldId = 0;
 
 /**
  * Reusable field chrome: label, control slot, help, and error.
+ * When `error` is set, help is hidden.
+ *
+ * Slots: default (the control), `label`, `help`, `error`.
+ * An `id` on the host is removed and copied onto the slotted control.
+ * The field also sets `described-by`, `description`, `invalid`, and `required` on that control.
+ * No events of its own. No public methods.
  *
  * @example
  * <ui-form-field label="Email" help="We never share this." required>

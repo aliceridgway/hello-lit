@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popover anchored to a trigger. Clicking the trigger toggles the panel. A descendant with `data-popover-close` closes it. The panel flips above the trigger when there is not enough room below.",
+          "name": "UiPopover",
+          "customElement": true,
+          "tagName": "ui-popover",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": { "text": "boolean" },
+              "readonly": true,
+              "description": "True while the panel is open."
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Opens the panel.",
+              "parameters": []
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "description": "Closes the panel.",
+              "parameters": []
+            }
+          ],
+          "events": [
+            {
+              "name": "open-change",
+              "type": { "text": "CustomEvent<{ open: boolean }>" },
+              "description": "Bubbles. Does not cross a shadow root. A listener on the tag still receives it. `detail.open` is the next state."
+            },
+            {
+              "name": "close",
+              "type": { "text": "CustomEvent" },
+              "description": "Bubbles and is composed. Fires when the panel closes."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Trigger. The first assigned element receives `aria-expanded`."
+            },
+            {
+              "name": "content",
+              "description": "Panel body."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-popover.ts",
+            "line": 20
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiPopover",
+          "declaration": {
+            "name": "UiPopover",
+            "module": "src/components/ui-popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-popover",
+          "declaration": {
+            "name": "UiPopover",
+            "module": "src/components/ui-popover.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

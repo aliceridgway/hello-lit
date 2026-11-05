@@ -5,6 +5,21 @@ const CHEVRON_URL = `url("data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"><path stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 6.25 8 9.75l3.5-3.5"/></svg>`,
 )}")`;
 
+/**
+ * Select control. Form-associated: `name` submits `value`,
+ * a form reset restores the value from connection, and a disabled fieldset disables the control.
+ *
+ * Slots: `options` (`<option>` and `<optgroup>`).
+ * Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed.
+ * No public methods.
+ *
+ * `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.
+ *
+ * @example
+ * <ui-select>
+ *   <option slot="options" value="apple">Apple</option>
+ * </ui-select>
+ */
 @customElement("ui-select")
 export class UiSelect extends LitElement {
   static formAssociated = true;
@@ -107,6 +122,7 @@ export class UiSelect extends LitElement {
   @property({ type: String })
   description = "";
 
+  /** Id of the help or error element. Copied to `aria-describedby` on the host. */
   @property({ attribute: "described-by" })
   describedBy = "";
 

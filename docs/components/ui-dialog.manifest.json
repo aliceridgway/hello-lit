@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-dialog.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Modal dialog. Set `open` to show it. The element calls `showModal()` and `close()` on the inner dialog. `close` fires when the user dismisses the dialog with the close button, a backdrop click, or Escape. Setting `open` to false from outside closes the dialog without a further `close` event. No public methods.",
+          "name": "UiDialog",
+          "customElement": true,
+          "tagName": "ui-dialog",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true,
+              "description": "Opens the modal when true."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": { "text": "string" },
+              "default": "\"32rem\"",
+              "attribute": "width",
+              "reflects": false,
+              "description": "CSS length applied to the dialog."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Opens the modal when true."
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": { "text": "string" },
+              "default": "\"32rem\"",
+              "description": "CSS length applied to the dialog."
+            }
+          ],
+          "events": [
+            {
+              "name": "close",
+              "type": { "text": "CustomEvent" },
+              "description": "Bubbles and is composed. Fires when the user dismisses the dialog with the close button, a backdrop click, or Escape. Setting `open` to false from outside does not fire `close`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Dialog body. The element supplies its own close button."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-dialog.ts",
+            "line": 18
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiDialog",
+          "declaration": {
+            "name": "UiDialog",
+            "module": "src/components/ui-dialog.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-dialog",
+          "declaration": {
+            "name": "UiDialog",
+            "module": "src/components/ui-dialog.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

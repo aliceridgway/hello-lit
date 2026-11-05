@@ -6,6 +6,18 @@ type TooltipPosition = (typeof positions)[number];
 
 let nextTooltipId = 0;
 
+/**
+ * Tooltip wrapped around a trigger. Opens on hover or focus, and dismisses on click.
+ *
+ * Slots: default (trigger).
+ * `position` is `top`, `bottom`, `left`, or `right`. Any other value falls back to `top`.
+ * No events. No public methods.
+ *
+ * @example
+ * <ui-tooltip text="Tooltip on top" position="top">
+ *   <button>Top</button>
+ * </ui-tooltip>
+ */
 @customElement("ui-tooltip")
 export class UiTooltip extends LitElement {
   static override styles = css`

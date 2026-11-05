@@ -1,6 +1,20 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
+/**
+ * Single-line text control. Form-associated: `name` submits `value`,
+ * a form reset restores the value from connection, and a disabled fieldset disables the control.
+ *
+ * Enter calls `requestSubmit()` on the parent form unless `type` is `"textarea"`,
+ * or the control is disabled or readonly.
+ * `input` is the inner input event, retargeted to this host after `value` updates.
+ * No slots. No public methods.
+ *
+ * `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.
+ *
+ * @example
+ * <ui-text-input name="email" placeholder="name@example.com"></ui-text-input>
+ */
 @customElement("ui-text-input")
 export class UiTextInput extends LitElement {
   static formAssociated = true;
@@ -101,6 +115,7 @@ export class UiTextInput extends LitElement {
   @property({ type: String, reflect: true })
   name = "";
 
+  /** Passed through to the inner input. `"textarea"` skips Enter-to-submit. */
   @property({ type: String })
   type = "text";
 
@@ -108,6 +123,7 @@ export class UiTextInput extends LitElement {
   @property({ type: String })
   description = "";
 
+  /** Id of the help or error element. Copied to `aria-describedby` on the host. */
   @property({ attribute: "described-by" })
   describedBy = "";
 
