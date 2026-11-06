@@ -40,6 +40,10 @@
   --ui-button-ghost-icon: #4338ca;
   --ui-button-ghost-hover-bg: #eef2ff;
 
+  --ui-chip-bg: #f3f4f6;
+  --ui-chip-fg: #111827;
+  --ui-chip-border: #e5e7eb;
+
   color: #111827;
   background: #f3f4f6;
   font-family: var(--ui-font-sans);

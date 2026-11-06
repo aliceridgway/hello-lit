@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One chip in a `ui-chip-group`. The remove button emits `remove` and the chip stays in the DOM. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. No public methods.",
+          "name": "UiChip",
+          "customElement": true,
+          "tagName": "ui-chip",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "value",
+              "reflects": false,
+              "description": "Identifier sent with `remove`. Falls back to the trimmed label when omitted."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "description": "Identifier sent with `remove`. Falls back to the trimmed label when omitted."
+            }
+          ],
+          "events": [
+            {
+              "name": "remove",
+              "type": { "text": "CustomEvent<{ value: string }>" },
+              "description": "Bubbles and is composed. Fired from the remove button. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. The chip stays in the DOM."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Chip label. The remove button's accessible name is `Remove {label}`."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--ui-chip-bg",
+              "default": "#f3f4f6",
+              "description": "Chip background."
+            },
+            {
+              "name": "--ui-chip-fg",
+              "default": "#111827",
+              "description": "Chip text color."
+            },
+            {
+              "name": "--ui-chip-border",
+              "default": "#e5e7eb",
+              "description": "Chip border color."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-chip.ts",
+            "line": 20
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiChip",
+          "declaration": {
+            "name": "UiChip",
+            "module": "src/components/ui-chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-chip",
+          "declaration": {
+            "name": "UiChip",
+            "module": "src/components/ui-chip.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

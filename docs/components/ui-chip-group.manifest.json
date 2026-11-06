@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-chip-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A wrapping list of `ui-chip` elements. `remove` bubbles from a chip with `{ value }`. This element does not remove the chip. No public methods.",
+          "name": "UiChipGroup",
+          "customElement": true,
+          "tagName": "ui-chip-group",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "events": [
+            {
+              "name": "remove",
+              "type": { "text": "CustomEvent<{ value: string }>" },
+              "description": "Bubbles from `ui-chip`. `detail.value` is the chip's `value` attribute, or its trimmed text when `value` is omitted. The group does not remove the chip."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "`ui-chip` elements."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-chip-group.ts",
+            "line": 19
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiChipGroup",
+          "declaration": {
+            "name": "UiChipGroup",
+            "module": "src/components/ui-chip-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-chip-group",
+          "declaration": {
+            "name": "UiChipGroup",
+            "module": "src/components/ui-chip-group.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
