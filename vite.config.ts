@@ -28,6 +28,7 @@ export default defineConfig({
       input: {
         main: "index.html",
         button: "button.html",
+        combobox: "combobox.html",
         dialog: "dialog.html",
         tooltip: "tooltip.html",
         popover: "popover.html",

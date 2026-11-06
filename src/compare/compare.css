@@ -202,6 +202,19 @@ body {
   font-size: 0.875rem;
 }
 
+.combobox-option__title {
+  color: var(--ui-color-fg);
+  font-size: var(--ui-font-size-md);
+  font-weight: var(--ui-font-weight-medium);
+  line-height: var(--ui-line-height);
+}
+
+.combobox-option__help {
+  color: var(--ui-color-fg-muted);
+  font-size: var(--ui-font-size-sm);
+  line-height: var(--ui-line-height);
+}
+
 .demo-stack input {
   width: 7rem;
   padding: 0.4rem 0.55rem;

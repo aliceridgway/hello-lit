@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-combobox-option.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One row in a `ui-combobox`. Place it in the combobox's `options` slot. The default slot is the row content, stacked in a column. `value` is the string the combobox stores when this row is chosen. `label` is what the field shows. Neither is the row's text. `ui-combobox` sets `active` on the highlighted row and `selected` when `value` matches the combobox value. No events. No public methods.",
+          "name": "UiComboboxOption",
+          "customElement": true,
+          "tagName": "ui-combobox-option",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "value",
+              "reflects": false,
+              "description": "String stored on the combobox when this row is chosen."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "label",
+              "reflects": false,
+              "description": "Text the combobox shows in the field when this row is chosen."
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true,
+              "description": "Set by `ui-combobox` while this row is highlighted."
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true,
+              "description": "Set by `ui-combobox` when `value` equals the combobox value."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "description": "String stored on the combobox when this row is chosen."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "description": "Text the combobox shows in the field when this row is chosen."
+            },
+            {
+              "name": "active",
+              "fieldName": "active",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Set by `ui-combobox` while this row is highlighted."
+            },
+            {
+              "name": "selected",
+              "fieldName": "selected",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Set by `ui-combobox` when `value` equals the combobox value."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Row content. A title with help text under it stacks in a column. This element does not style that content."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-combobox-option.ts",
+            "line": 20
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiComboboxOption",
+          "declaration": {
+            "name": "UiComboboxOption",
+            "module": "src/components/ui-combobox-option.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-combobox-option",
+          "declaration": {
+            "name": "UiComboboxOption",
+            "module": "src/components/ui-combobox-option.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
