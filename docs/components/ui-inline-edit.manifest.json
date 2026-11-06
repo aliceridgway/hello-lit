@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ui-inline-edit.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Label and value that open a popover form. An empty `value` slot shows `placeholder`. A clear button shows while the `value` slot has content. It dispatches `clear` and closes the panel. Submit on a form in the `content` slot closes the panel. A descendant with `data-popover-close` closes it without submit. The panel flips above the trigger when there is not enough room below.",
+          "name": "UiInlineEdit",
+          "customElement": true,
+          "tagName": "ui-inline-edit",
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": { "text": "string" },
+              "default": "\"\"",
+              "attribute": "label",
+              "reflects": false,
+              "description": "Text shown beside the current value."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": { "text": "string" },
+              "default": "\"------\"",
+              "attribute": "placeholder",
+              "reflects": false,
+              "description": "Shown when the `value` slot is empty."
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": { "text": "boolean" },
+              "readonly": true,
+              "description": "True while the panel is open."
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Opens the panel.",
+              "parameters": []
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "description": "Closes the panel.",
+              "parameters": []
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": { "text": "string" },
+              "default": "\"\""
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": { "text": "string" },
+              "default": "\"------\""
+            }
+          ],
+          "events": [
+            {
+              "name": "clear",
+              "type": { "text": "CustomEvent" },
+              "description": "Bubbles and is composed. Fires when the clear button is clicked. The app empties the value slot."
+            },
+            {
+              "name": "close",
+              "type": { "text": "CustomEvent" },
+              "description": "Bubbles and is composed. Fires when the panel closes."
+            }
+          ],
+          "slots": [
+            {
+              "name": "value",
+              "description": "Current value. The app renders this. An empty slot shows `placeholder`."
+            },
+            {
+              "name": "content",
+              "description": "Panel body. A form here stays in light DOM so its fields and submit button can submit."
+            }
+          ],
+          "source": {
+            "href": "src/components/ui-inline-edit.ts",
+            "line": 25
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "UiInlineEdit",
+          "declaration": {
+            "name": "UiInlineEdit",
+            "module": "src/components/ui-inline-edit.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ui-inline-edit",
+          "declaration": {
+            "name": "UiInlineEdit",
+            "module": "src/components/ui-inline-edit.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

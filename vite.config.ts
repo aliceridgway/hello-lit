@@ -33,6 +33,7 @@ export default defineConfig({
         tooltip: "tooltip.html",
         popover: "popover.html",
         form: "form.html",
+        "inline-edit": "inline-edit.html",
         "dropdown-menu": "dropdown-menu.html",
       },
     },

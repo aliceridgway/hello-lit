@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inline edit</title>
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href="index.html">Back</a>
+      <h1>Inline edit</h1>
+      <div class="columns">
+        <section class="column" aria-labelledby="vue-heading">
+          <div class="column-heading">
+            <h2 id="vue-heading">Vue</h2>
+            <a
+              class="source"
+              href="https://github.com/aliceridgway/hello-lit/blob/main/src/inline-edit/VueApp.vue"
+              target="_blank"
+              rel="noreferrer"
+              >Source</a
+            >
+          </div>
+          <div id="vue-app"></div>
+        </section>
+        <section class="column" aria-labelledby="svelte-heading">
+          <div class="column-heading">
+            <h2 id="svelte-heading">Svelte</h2>
+            <a
+              class="source"
+              href="https://github.com/aliceridgway/hello-lit/blob/main/src/inline-edit/SvelteApp.svelte"
+              target="_blank"
+              rel="noreferrer"
+              >Source</a
+            >
+          </div>
+          <div id="svelte-app"></div>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/inline-edit.ts"></script>
+  </body>
+</html>
