@@ -2,9 +2,11 @@
 import { ref } from "vue";
 import "../components/ui-form-field";
 import "../components/ui-text-input";
+import "../components/ui-number-input";
 import "../components/ui-select";
 
 const name = ref("");
+const duration = ref("");
 const fruit = ref("");
 
 function onNameInput(event: Event) {
@@ -12,6 +14,13 @@ function onNameInput(event: Event) {
   const field = current instanceof HTMLElement && "value" in current ? current : event.target;
   if (!(field instanceof HTMLElement) || !("value" in field)) return;
   name.value = String(field.value);
+}
+
+function onDurationInput(event: Event) {
+  const current = event.currentTarget;
+  const field = current instanceof HTMLElement && "value" in current ? current : event.target;
+  if (!(field instanceof HTMLElement) || !("value" in field)) return;
+  duration.value = String(field.value);
 }
 
 function onFruitInput(event: Event) {
@@ -43,6 +52,34 @@ function onFruitInput(event: Event) {
       </ui-form-field>
       <ui-form-field label="Account id">
         <ui-text-input value="usr_2048" disabled></ui-text-input>
+      </ui-form-field>
+    </section>
+
+    <section class="form-demo__section" aria-labelledby="number-heading">
+      <h3 id="number-heading">Number</h3>
+      <div class="form-demo__live">
+        <ui-form-field label="Duration" help="How long it runs.">
+          <ui-number-input
+            :value="duration"
+            min="0"
+            step="1"
+            unit="minutes"
+            @input="onDurationInput"
+          ></ui-number-input>
+        </ui-form-field>
+        <p class="demo-meta">Current value: {{ duration }}</p>
+      </div>
+      <ui-form-field label="Quantity" required>
+        <ui-number-input min="1"></ui-number-input>
+      </ui-form-field>
+      <ui-form-field label="Seats" error="Enter at least 1.">
+        <ui-number-input value="0" min="1"></ui-number-input>
+      </ui-form-field>
+      <ui-form-field label="Timeout" help="Applied on the server.">
+        <ui-number-input value="30" unit="seconds" readonly></ui-number-input>
+      </ui-form-field>
+      <ui-form-field label="Retry count">
+        <ui-number-input value="3" disabled></ui-number-input>
       </ui-form-field>
     </section>
 
