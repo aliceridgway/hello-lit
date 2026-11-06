@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "One chip in a `ui-chip-group`. The remove button emits `remove` and the chip stays in the DOM. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. No public methods.",
+          "description": "One chip in a `ui-chip-group`. `removable` defaults to true and shows the remove button. Set the property to false to hide the button; that chip does not emit `remove`. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. The chip stays in the DOM. No public methods.",
           "name": "UiChip",
           "customElement": true,
           "tagName": "ui-chip",
@@ -25,6 +25,15 @@
               "attribute": "value",
               "reflects": false,
               "description": "Identifier sent with `remove`. Falls back to the trimmed label when omitted."
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": { "text": "boolean" },
+              "default": "true",
+              "attribute": "removable",
+              "reflects": false,
+              "description": "Shows the remove button. Set to false to keep the chip from emitting `remove`."
             }
           ],
           "attributes": [
@@ -34,13 +43,20 @@
               "type": { "text": "string" },
               "default": "\"\"",
               "description": "Identifier sent with `remove`. Falls back to the trimmed label when omitted."
+            },
+            {
+              "name": "removable",
+              "fieldName": "removable",
+              "type": { "text": "boolean" },
+              "default": "true",
+              "description": "Shows the remove button. Set the property to false to hide it. The chip does not emit `remove`."
             }
           ],
           "events": [
             {
               "name": "remove",
               "type": { "text": "CustomEvent<{ value: string }>" },
-              "description": "Bubbles and is composed. Fired from the remove button. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. The chip stays in the DOM."
+              "description": "Bubbles and is composed. Fired from the remove button when `removable` is true. `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted. The chip stays in the DOM."
             }
           ],
           "slots": [
@@ -68,7 +84,7 @@
           ],
           "source": {
             "href": "src/components/ui-chip.ts",
-            "line": 20
+            "line": 23
           }
         }
       ],

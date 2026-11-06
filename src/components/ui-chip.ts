@@ -1,5 +1,6 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 
 export type ChipRemoveDetail = {
   value: string;
@@ -9,8 +10,10 @@ export type ChipRemoveDetail = {
  * One chip in a `ui-chip-group`.
  *
  * Slots: default (label).
- * `remove` bubbles and is composed. `detail.value` is the `value` attribute,
- * or the trimmed text content when `value` is omitted.
+ * `removable` defaults to true. Set the property to false to hide the remove button.
+ * `remove` bubbles and is composed when the remove button is clicked.
+ * `detail.value` is the `value` attribute, or the trimmed text content when `value` is omitted.
+ * A chip with `removable` false does not emit `remove`.
  * No public methods. The chip stays in the DOM after the click.
  *
  * @example
@@ -42,9 +45,17 @@ export class UiChip extends LitElement {
       line-height: var(--ui-line-height);
     }
 
+    .ui-chip--static {
+      padding-right: var(--ui-space-3);
+    }
+
     .ui-chip__label {
       padding-right: var(--ui-space-1);
       white-space: nowrap;
+    }
+
+    .ui-chip--static .ui-chip__label {
+      padding-right: 0;
     }
 
     .ui-chip__remove {
@@ -83,6 +94,10 @@ export class UiChip extends LitElement {
   @property({ type: String })
   value = "";
 
+  /** Shows the remove button. Set to false to keep the chip from emitting `remove`. */
+  @property({ type: Boolean })
+  removable = true;
+
   @state()
   private label = "";
 
@@ -105,6 +120,7 @@ export class UiChip extends LitElement {
 
   private onRemove(event: MouseEvent) {
     event.preventDefault();
+    if (!this.removable) return;
     const value = this.value.trim() || (this.textContent ?? "").trim();
     this.dispatchEvent(
       new CustomEvent<ChipRemoveDetail>("remove", {
@@ -118,21 +134,25 @@ export class UiChip extends LitElement {
   override render() {
     const removeLabel = this.label ? `Remove ${this.label}` : "Remove";
     return html`
-      <span class="ui-chip">
+      <span class="ui-chip ${classMap({ "ui-chip--static": !this.removable })}">
         <span class="ui-chip__label">
           <slot @slotchange=${this.onSlotChange}></slot>
         </span>
-        <button class="ui-chip__remove" type="button" aria-label=${removeLabel} @click=${this.onRemove}>
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-width="1.5"
-              d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5"
-            />
-          </svg>
-        </button>
+        ${this.removable
+          ? html`
+              <button class="ui-chip__remove" type="button" aria-label=${removeLabel} @click=${this.onRemove}>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5"
+                  />
+                </svg>
+              </button>
+            `
+          : nothing}
       </span>
     `;
   }
