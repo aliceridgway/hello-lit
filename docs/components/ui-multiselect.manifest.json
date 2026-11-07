@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Multiselect control. Form-associated: `name` submits one entry per selected value, a form reset restores the value from connection, and a disabled fieldset disables the control. `value` is the selected values, in selection order. The attribute is a JSON array. A value with no matching option still shows a chip, labeled with the value until an option provides text. Copies `<option>` and `<optgroup>` elements from the `options` slot into the list. Empty-value options are ignored. Disabled options are shown and cannot be toggled. Group labels are headings. Choosing a row toggles that value and leaves the list open. A chip remove drops that value and does not toggle the list. Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed. Escape, focus leaving the control, and a pointer outside close the list. No public methods. `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.",
+          "description": "Multiselect control. Form-associated: `name` submits one entry per selected value, a form reset restores the value from connection, and a disabled fieldset disables the control. `value` is the selected values, in selection order. The attribute is a JSON array. A value with no matching option still shows a chip, labeled with the value until an option provides text. Copies `<option>` and `<optgroup>` elements from the `options` slot into the list. Empty-value options are ignored. Disabled options are shown and cannot be toggled. Group labels are headings. Choosing a row toggles that value and leaves the list open. A chip remove drops that value and does not toggle the list. Backspace removes the last chip. In a searchable field it deletes query text first, and removes a chip only when the query is empty. A disabled option stays selected. `searchable` shows a text input after the chips. The text is a query, not `value`. A row matches when its label or value contains the query, ignoring case. A group heading shows only when one of its options matches. Focusing the input or typing opens the list. A query highlights the first enabled match. Enter or a comma adds that match, clears the query, and leaves the list open. Typed text that matches nothing is ignored. Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed. Typing does not. Escape, focus leaving the control, and a pointer outside close the list and clear the query. No public methods. `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.",
           "name": "UiMultiselect",
           "customElement": true,
           "tagName": "ui-multiselect",
@@ -43,6 +43,15 @@
               "attribute": "placeholder",
               "reflects": false,
               "description": "Text shown when no value is selected."
+            },
+            {
+              "kind": "field",
+              "name": "searchable",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "attribute": "searchable",
+              "reflects": true,
+              "description": "Shows a text input that filters options by label or value. The text is not submitted."
             },
             {
               "kind": "field",
@@ -110,6 +119,13 @@
               "fieldName": "placeholder",
               "type": { "text": "string" },
               "default": "\"\""
+            },
+            {
+              "name": "searchable",
+              "fieldName": "searchable",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Shows a text input that filters options by label or value. The text is not submitted."
             },
             {
               "name": "disabled",
@@ -216,7 +232,7 @@
           ],
           "source": {
             "href": "src/components/ui-multiselect.ts",
-            "line": 52
+            "line": 56
           }
         }
       ],

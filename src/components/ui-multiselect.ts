@@ -37,8 +37,12 @@ type ListItem = OptionItem | GroupItem;
  * Disabled options are shown and cannot be toggled. Group labels are headings.
  * Choosing a row toggles that value and leaves the list open.
  * A chip remove drops that value and does not toggle the list.
- * Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed.
- * Escape, focus leaving the control, and a pointer outside close the list.
+ * Backspace removes the last chip. In a searchable field it deletes query text first, and removes a chip only when the query is empty. A disabled option stays selected.
+ * `searchable` shows a text input after the chips. The text is a query, not `value`.
+ * A row matches when its label or value contains the query, ignoring case. A group heading shows only when one of its options matches.
+ * Focusing the input or typing opens the list. A query highlights the first enabled match. Enter or a comma adds that match, clears the query, and leaves the list open. Typed text that matches nothing is ignored.
+ * Dispatches `input` and `change` on this host after `value` updates. Both bubble and are composed. Typing does not.
+ * Escape, focus leaving the control, and a pointer outside close the list and clear the query.
  * No public methods.
  *
  * `ui-form-field` writes `description`, `described-by`, `invalid`, and `required`.
@@ -139,6 +143,38 @@ export class UiMultiselect extends LitElement {
       pointer-events: none;
     }
 
+    .ui-field__control:has(.query) {
+      cursor: text;
+    }
+
+    .query {
+      position: relative;
+      z-index: 1;
+      order: 1;
+      flex: 1 1 6rem;
+      min-width: 4rem;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      cursor: text;
+    }
+
+    .query::placeholder {
+      color: var(--ui-field-placeholder);
+    }
+
+    .query:focus {
+      outline: none;
+    }
+
+    .query:disabled {
+      cursor: not-allowed;
+    }
+
     .opener {
       position: absolute;
       inset: 0;
@@ -182,13 +218,18 @@ export class UiMultiselect extends LitElement {
       flex-direction: column;
     }
 
-    .group {
+    .group,
+    .empty {
       margin: 0;
       padding: var(--ui-space-2) var(--ui-space-3) var(--ui-space-1);
       color: #6b7280;
       font-size: var(--ui-font-size-sm);
       font-weight: var(--ui-font-weight-medium);
       line-height: var(--ui-line-height);
+    }
+
+    .empty {
+      font-weight: 400;
     }
 
     .option {
@@ -261,6 +302,10 @@ export class UiMultiselect extends LitElement {
   @property({ type: String })
   placeholder = "";
 
+  /** Shows a text input that filters options by label or value. The text is not submitted. */
+  @property({ type: Boolean, reflect: true })
+  searchable = false;
+
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
@@ -293,6 +338,9 @@ export class UiMultiselect extends LitElement {
   @state()
   private items: ListItem[] = [];
 
+  @state()
+  private query = "";
+
   private readonly internals: ElementInternals;
   private readonly listId = `ui-multiselect-list-${++nextMultiselectId}`;
   private defaultValue: string[] = [];
@@ -300,6 +348,8 @@ export class UiMultiselect extends LitElement {
   private panelWidth = 0;
   private panelHeight = 0;
   private repositioning = false;
+  private focusingQuery = false;
+  private wantsOpen = false;
 
   constructor() {
     super();
@@ -320,6 +370,7 @@ export class UiMultiselect extends LitElement {
   }
 
   override willUpdate(changed: PropertyValues<this>) {
+    if (changed.has("searchable") && !this.searchable && this.query !== "") this.query = "";
     if (!changed.has("value")) return;
     const next = this.normalizedValues(this.value);
     if (this.sameValues(next, this.value)) return;
@@ -340,6 +391,7 @@ export class UiMultiselect extends LitElement {
       return;
     }
 
+    this.syncQueryInput();
     this.syncActiveDescendant();
     if (this.open) this.place();
   }
@@ -355,6 +407,7 @@ export class UiMultiselect extends LitElement {
   formResetCallback() {
     this.value = [...this.defaultValue];
     this.activeIndex = -1;
+    this.query = "";
   }
 
   private get controlDisabled() {
@@ -363,6 +416,14 @@ export class UiMultiselect extends LitElement {
 
   private get opener() {
     return this.renderRoot.querySelector<HTMLButtonElement>(".opener");
+  }
+
+  private get queryEl() {
+    return this.renderRoot.querySelector<HTMLInputElement>(".query");
+  }
+
+  private get popupTarget() {
+    return this.searchable ? this.queryEl : this.opener;
   }
 
   private get panelEl() {
@@ -404,14 +465,41 @@ export class UiMultiselect extends LitElement {
     return this.items.every((item) => item.kind !== "option" || item.value !== value || !item.disabled);
   }
 
-  private toggleValue(value: string) {
+  private visibleItems() {
+    const needle = this.query.trim().toLowerCase();
+    if (!this.searchable || needle === "") return this.items;
+    const visible: ListItem[] = [];
+    let group: GroupItem | null = null;
+    let groupUsed = false;
+    for (const item of this.items) {
+      if (item.kind === "group") {
+        group = item;
+        groupUsed = false;
+        continue;
+      }
+      if (!`${item.label}\n${item.value}`.toLowerCase().includes(needle)) continue;
+      if (group && !groupUsed) {
+        visible.push(group);
+        groupUsed = true;
+      }
+      visible.push(item);
+    }
+    return visible;
+  }
+
+  private toggleValue(value: string, clearQuery = false) {
     if (this.controlDisabled || !this.canToggle(value)) return;
     const next = this.value.includes(value) ? this.value.filter((item) => item !== value) : [...this.value, value];
     this.commit(next);
+    if (clearQuery) this.query = "";
   }
 
   private selectableIndexes() {
-    return this.items.flatMap((item, index) => (item.kind === "option" && !item.disabled ? [index] : []));
+    return this.visibleItems().flatMap((item) => {
+      if (item.kind !== "option" || item.disabled) return [];
+      const index = this.items.indexOf(item);
+      return index < 0 ? [] : [index];
+    });
   }
 
   private syncFormValue() {
@@ -460,7 +548,9 @@ export class UiMultiselect extends LitElement {
     this.items = items;
     const current = items[this.activeIndex];
     if (!current || current.kind !== "option" || current.disabled) this.activeIndex = -1;
-    if (!items.some((item) => item.kind === "option") && this.open) this.closeList();
+    const hasOptions = items.some((item) => item.kind === "option");
+    if (!hasOptions && this.open) this.closeList();
+    else if (this.wantsOpen && hasOptions && !this.open) this.openList();
   }
 
   private readonly onDocumentPointerDown = (event: PointerEvent) => {
@@ -485,10 +575,52 @@ export class UiMultiselect extends LitElement {
     this.closeList();
   }
 
+  private onOpenerMouseDown(event: MouseEvent) {
+    if (!this.searchable) return;
+    event.preventDefault();
+  }
+
   private onOpenerClick() {
     if (this.controlDisabled) return;
+    if (this.searchable) {
+      this.focusingQuery = true;
+      this.queryEl?.focus();
+      this.focusingQuery = false;
+    }
     if (this.open) this.closeList();
     else this.openList();
+  }
+
+  private onQueryFocus() {
+    if (this.focusingQuery || this.controlDisabled) return;
+    this.wantsOpen = true;
+    queueMicrotask(() => {
+      if (this.wantsOpen) this.openList();
+    });
+  }
+
+  private onQueryInput(event: Event) {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement) || this.controlDisabled) return;
+    this.query = input.value;
+    this.highlightQueryMatch();
+    if (this.hasOptions) this.openList();
+  }
+
+  private highlightQueryMatch() {
+    const indexes = this.selectableIndexes();
+    if (this.searchable && this.query.trim() !== "") {
+      if (!indexes.includes(this.activeIndex)) this.activeIndex = indexes[0] ?? -1;
+      return;
+    }
+    if (!indexes.includes(this.activeIndex)) this.activeIndex = -1;
+  }
+
+  private commitActive(clearQuery: boolean) {
+    const item = this.items[this.activeIndex];
+    if (!item || item.kind !== "option" || item.disabled) return;
+    this.toggleValue(item.value, clearQuery);
+    if (clearQuery) this.activeIndex = -1;
   }
 
   private onKeydown(event: KeyboardEvent) {
@@ -502,14 +634,38 @@ export class UiMultiselect extends LitElement {
     }
 
     if (event.key === "Escape") {
-      if (!this.open) return;
+      if (!this.open && this.query === "") return;
       event.preventDefault();
       event.stopPropagation();
       this.closeList();
       return;
     }
 
-    if ((event.key !== "Enter" && event.key !== " ") || !this.open) return;
+    if (event.key === "Backspace") {
+      if (this.searchable && this.query !== "") return;
+      event.preventDefault();
+      const last = this.value.at(-1);
+      if (last) this.toggleValue(last);
+      return;
+    }
+
+    if (this.searchable && event.key === " ") return;
+
+    if (this.searchable && event.key === ",") {
+      event.preventDefault();
+      if (this.query.trim() === "") return;
+      this.commitActive(true);
+      return;
+    }
+
+    if (event.key === "Enter" && this.searchable) {
+      event.preventDefault();
+      if (!this.open) return;
+      this.commitActive(true);
+      return;
+    }
+
+    if ((event.key !== "Enter" && event.key !== " ") || !this.open || this.searchable) return;
     event.preventDefault();
     const item = this.items[this.activeIndex];
     if (!item || item.kind !== "option") return;
@@ -536,7 +692,7 @@ export class UiMultiselect extends LitElement {
     const item = this.items[index];
     if (!item || item.kind !== "option") return;
     this.activeIndex = index;
-    this.toggleValue(item.value);
+    this.toggleValue(item.value, true);
   }
 
   private optionRow(target: EventTarget | null) {
@@ -558,6 +714,8 @@ export class UiMultiselect extends LitElement {
     if (open) this.bindReposition();
     else {
       this.activeIndex = -1;
+      this.wantsOpen = false;
+      if (this.query !== "") this.query = "";
       this.unbindReposition();
     }
   }
@@ -594,28 +752,37 @@ export class UiMultiselect extends LitElement {
       panel.showPopover();
     }
     this.open = true;
+    this.wantsOpen = true;
     this.bindReposition();
   }
 
   private closeList() {
     this.activeIndex = -1;
+    this.wantsOpen = false;
+    if (this.query !== "") this.query = "";
     const panel = this.panelEl;
     if (panel?.matches(":popover-open")) panel.hidePopover();
     this.open = false;
     this.unbindReposition();
   }
 
+  private syncQueryInput() {
+    const input = this.queryEl;
+    if (!input || input.value === this.query) return;
+    input.value = this.query;
+  }
+
   private syncActiveDescendant() {
-    const button = this.opener;
-    if (!button) return;
+    const target = this.popupTarget;
+    if (!target) return;
     const item = this.open ? this.items[this.activeIndex] : undefined;
-    const active = item?.kind === "option" ? item : null;
-    if (active) button.setAttribute("aria-activedescendant", active.id);
-    else button.removeAttribute("aria-activedescendant");
-    if (!("ariaActiveDescendantElement" in button)) return;
-    const element = active ? this.renderRoot.querySelector<HTMLElement>(`#${active.id}`) : null;
-    (button as HTMLButtonElement & { ariaActiveDescendantElement: Element | null }).ariaActiveDescendantElement =
-      element;
+    const active = item?.kind === "option" && this.visibleItems().includes(item) ? item : null;
+    if ("ariaActiveDescendantElement" in target) {
+      const element = active ? this.renderRoot.querySelector<HTMLElement>(`#${active.id}`) : null;
+      (target as HTMLElement & { ariaActiveDescendantElement: Element | null }).ariaActiveDescendantElement = element;
+    }
+    if (active) target.setAttribute("aria-activedescendant", active.id);
+    else target.removeAttribute("aria-activedescendant");
   }
 
   private measureNatural(panel: HTMLElement) {
@@ -720,18 +887,45 @@ export class UiMultiselect extends LitElement {
 
   override render() {
     const selected = this.value;
+    const visible = this.visibleItems();
+    const hasVisibleOptions = visible.some((item) => item.kind === "option");
     return html`
       <div class=${classMap({ "ui-field__control": true, "is-disabled": this.controlDisabled })} @focusout=${this.onFocusOut}>
+        ${this.searchable
+          ? html`
+              <input
+                class="query"
+                type="text"
+                role="combobox"
+                autocomplete="off"
+                aria-autocomplete="list"
+                placeholder=${selected.length === 0 && this.query === "" && this.placeholder ? this.placeholder : nothing}
+                ?disabled=${this.controlDisabled}
+                aria-haspopup="listbox"
+                aria-expanded=${this.open ? "true" : "false"}
+                aria-controls=${this.listId}
+                aria-invalid=${this.invalid ? "true" : nothing}
+                aria-required=${this.required ? "true" : nothing}
+                aria-description=${this.description || nothing}
+                @focus=${this.onQueryFocus}
+                @input=${this.onQueryInput}
+                @keydown=${this.onKeydown}
+              />
+            `
+          : nothing}
         <button
           class="opener"
           type="button"
+          tabindex=${this.searchable ? "-1" : nothing}
+          aria-hidden=${this.searchable ? "true" : nothing}
           ?disabled=${this.controlDisabled}
-          aria-haspopup="listbox"
-          aria-expanded=${this.open ? "true" : "false"}
-          aria-controls=${this.listId}
-          aria-invalid=${this.invalid ? "true" : nothing}
-          aria-required=${this.required ? "true" : nothing}
-          aria-description=${this.description || nothing}
+          aria-haspopup=${this.searchable ? nothing : "listbox"}
+          aria-expanded=${this.searchable ? nothing : this.open ? "true" : "false"}
+          aria-controls=${this.searchable ? nothing : this.listId}
+          aria-invalid=${!this.searchable && this.invalid ? "true" : nothing}
+          aria-required=${!this.searchable && this.required ? "true" : nothing}
+          aria-description=${this.searchable ? nothing : this.description || nothing}
+          @mousedown=${this.onOpenerMouseDown}
           @click=${this.onOpenerClick}
           @keydown=${this.onKeydown}
         ></button>
@@ -754,7 +948,7 @@ export class UiMultiselect extends LitElement {
                 )}
               </span>
             `
-          : this.placeholder
+          : !this.searchable && this.placeholder
             ? html`<span class="placeholder">${this.placeholder}</span>`
             : nothing}
       </div>
@@ -767,10 +961,16 @@ export class UiMultiselect extends LitElement {
           @mousedown=${this.onListMouseDown}
           @click=${this.onListClick}
         >
-          ${this.items.map((item, index) =>
-            item.kind === "group" ? html`<div class="group" role="presentation">${item.label}</div>` : this.renderOption(item, index),
-          )}
+          ${visible.map((item) => {
+            const index = this.items.indexOf(item);
+            return item.kind === "group"
+              ? html`<div class="group" role="presentation">${item.label}</div>`
+              : this.renderOption(item, index);
+          })}
         </div>
+        ${this.searchable && this.query.trim() !== "" && !hasVisibleOptions
+          ? html`<div class="empty">No matches</div>`
+          : nothing}
       </div>
       <slot name="options" @slotchange=${this.onSlotChange}></slot>
     `;

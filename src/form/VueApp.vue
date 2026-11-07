@@ -133,12 +133,22 @@ function onFruitsInput(event: Event) {
     <section class="form-demo__section" aria-labelledby="multiselect-heading">
       <h3 id="multiselect-heading">Multiselect</h3>
       <div class="form-demo__live">
-        <ui-form-field label="Favorite fruits" help="Used on your profile.">
-          <ui-multiselect :value.prop="fruits" placeholder="Select fruits" @input="onFruitsInput">
+        <ui-form-field label="Favorite fruits" help="Type to filter the list.">
+          <ui-multiselect :value.prop="fruits" placeholder="Select fruits" searchable @input="onFruitsInput">
             <option slot="options" value="apple">Apple</option>
+            <option slot="options" value="apricot">Apricot</option>
             <option slot="options" value="banana">Banana</option>
+            <option slot="options" value="blackberry">Blackberry</option>
             <option slot="options" value="cherry">Cherry</option>
             <option slot="options" value="durian">Durian</option>
+            <option slot="options" value="grape">Grape</option>
+            <option slot="options" value="grapefruit">Grapefruit</option>
+            <option slot="options" value="lemon">Lemon</option>
+            <option slot="options" value="mango">Mango</option>
+            <option slot="options" value="orange">Orange</option>
+            <option slot="options" value="peach">Peach</option>
+            <option slot="options" value="pear">Pear</option>
+            <option slot="options" value="plum">Plum</option>
           </ui-multiselect>
         </ui-form-field>
         <p class="demo-meta">Current value: {{ fruits.join(", ") }}</p>
