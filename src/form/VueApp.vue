@@ -4,10 +4,12 @@ import "../components/ui-form-field";
 import "../components/ui-text-input";
 import "../components/ui-number-input";
 import "../components/ui-select";
+import "../components/ui-multiselect";
 
 const name = ref("");
 const duration = ref("");
 const fruit = ref("");
+const fruits = ref<string[]>([]);
 
 function onNameInput(event: Event) {
   const current = event.currentTarget;
@@ -28,6 +30,13 @@ function onFruitInput(event: Event) {
   const field = current instanceof HTMLElement && "value" in current ? current : event.target;
   if (!(field instanceof HTMLElement) || !("value" in field)) return;
   fruit.value = String(field.value);
+}
+
+function onFruitsInput(event: Event) {
+  const current = event.currentTarget;
+  const field = current instanceof HTMLElement && "value" in current ? current : event.target;
+  if (!(field instanceof HTMLElement) || !("value" in field) || !Array.isArray(field.value)) return;
+  fruits.value = field.value.map(String);
 }
 </script>
 
@@ -118,6 +127,42 @@ function onFruitInput(event: Event) {
           <option slot="options" value="eu">EU</option>
           <option slot="options" value="ap">APAC</option>
         </ui-select>
+      </ui-form-field>
+    </section>
+
+    <section class="form-demo__section" aria-labelledby="multiselect-heading">
+      <h3 id="multiselect-heading">Multiselect</h3>
+      <div class="form-demo__live">
+        <ui-form-field label="Favorite fruits" help="Used on your profile.">
+          <ui-multiselect :value.prop="fruits" placeholder="Select fruits" @input="onFruitsInput">
+            <option slot="options" value="apple">Apple</option>
+            <option slot="options" value="banana">Banana</option>
+            <option slot="options" value="cherry">Cherry</option>
+            <option slot="options" value="durian">Durian</option>
+          </ui-multiselect>
+        </ui-form-field>
+        <p class="demo-meta">Current value: {{ fruits.join(", ") }}</p>
+      </div>
+      <ui-form-field label="Countries" required>
+        <ui-multiselect placeholder="Select countries">
+          <option slot="options" value="uk">United Kingdom</option>
+          <option slot="options" value="us">United States</option>
+          <option slot="options" value="ca">Canada</option>
+        </ui-multiselect>
+      </ui-form-field>
+      <ui-form-field label="Plans" error="That plan is no longer available.">
+        <ui-multiselect :value.prop="['pro']">
+          <option slot="options" value="free">Free</option>
+          <option slot="options" value="pro">Pro</option>
+          <option slot="options" value="enterprise">Enterprise</option>
+        </ui-multiselect>
+      </ui-form-field>
+      <ui-form-field label="Regions">
+        <ui-multiselect :value.prop="['eu']" disabled>
+          <option slot="options" value="us">US</option>
+          <option slot="options" value="eu">EU</option>
+          <option slot="options" value="ap">APAC</option>
+        </ui-multiselect>
       </ui-form-field>
     </section>
   </div>
